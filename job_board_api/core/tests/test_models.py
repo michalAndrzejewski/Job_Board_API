@@ -4,6 +4,7 @@ Tests for models.
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
 
 
 class ModelTests(TestCase):
@@ -49,3 +50,20 @@ class ModelTests(TestCase):
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
 
+    def test_create_listing(self):
+        """Test creating a job listing."""
+        user = get_user_model().objects.create_user(
+            'test@example.com',
+            'password123',
+        )
+
+        job_listing = models.JobListing.objects.create(
+            user=user,
+            job_title='Test job listing',
+            job_seniority='Senior',
+            job_description='This is a test job listing',
+            salary_max=4000,
+            salary_min=5000,
+        )
+
+        self.assertEqual(str(job_listing), job_listing.job_title)

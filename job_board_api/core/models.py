@@ -1,7 +1,7 @@
 """
 Database models
 """
-
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -47,3 +47,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class JobListing(models.Model):
+    """'''Job listing object.'''"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=True, null=True
+    )
+    company = models.CharField(max_length=255)
+    job_title = models.CharField(max_length=255)
+    job_seniority = models.CharField(max_length=255)
+    job_description = models.TextField(blank=True)
+    salary_max = models.IntegerField(default=5000, blank=True, null=True)
+    salary_min = models.IntegerField(default=4000, blank=True, null=True)
+    date_added = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.job_title
