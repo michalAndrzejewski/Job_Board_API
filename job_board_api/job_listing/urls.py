@@ -10,7 +10,7 @@ from .views import JobListingViewSet
 
 
 router = DefaultRouter()
-router.register('job_listings', JobListingViewSet)
+router.register('job_listings', JobListingViewSet, basename='job_listing')
 
 app_name = 'job_listing'
 

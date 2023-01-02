@@ -14,7 +14,7 @@ from core.models import JobListing
 from job_listing.serializers import JobListingSerializer
 
 
-JOB_LISTING_URL = reverse('job_listing:job_listings-list')
+JOB_LISTING_URL = reverse('job_listing:job_listing-list')
 
 
 def create_job_listing(user, **params):
