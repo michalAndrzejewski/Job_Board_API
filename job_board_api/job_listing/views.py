@@ -2,6 +2,7 @@
 Views for the job listing APIs
 """
 from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -19,4 +20,8 @@ class JobListingViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve job listings for authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-id')
+
+    def perform_create(self, serializer):
+        """Create a job listing with a user"""
+        serializer.save(user=self.request.user)
 

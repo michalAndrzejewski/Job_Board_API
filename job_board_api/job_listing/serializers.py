@@ -12,7 +12,7 @@ class JobListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobListing
         fields = [
-            'id',
+            'id',  # to be removed, left for easy recognition of objects in database
             'company',
             'job_title',
             'job_seniority',
